@@ -18,7 +18,7 @@ on:
         required: false
         default: ""
       crd_pin:
-        description: "CRD PIN (6â€“12 digits). Used when launching CRD to avoid interactive prompt."
+        description: "CRD PIN (6–12 digits). Used when launching CRD to avoid interactive prompt."
         required: false
         default: "123456"
 
@@ -116,7 +116,7 @@ jobs:
           ${{ inputs.crd_code }}
           '@.Trim()
           $pin = "${{ inputs.crd_pin }}".Trim()
-          if ($pin -notmatch '^\d{6,12}$') { Write-Error "crd_pin must be 6â€“12 digits."; exit 1 }
+          if ($pin -notmatch '^\d{6,12}$') { Write-Error "crd_pin must be 6–12 digits."; exit 1 }
 
           $starter = "${Env:PROGRAMFILES(X86)}\Google\Chrome Remote Desktop\CurrentVersion\remoting_start_host.exe"
           if (-not (Test-Path $starter)) { Write-Error "remoting_start_host.exe not found."; exit 1 }
@@ -250,7 +250,7 @@ jobs:
               Start-Process msiexec.exe -ArgumentList "/i","`"$installerPath`"","/quiet","/norestart" -Wait
               Remove-Item $installerPath -Force
             } catch {
-              Write-Host "MSI install failed, trying wingetâ€¦"
+              Write-Host "MSI install failed, trying winget…"
               winget install --id RustDesk.RustDesk -e --silent --accept-package-agreements --accept-source-agreements --disable-interactivity
             }
           }
